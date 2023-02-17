@@ -49,8 +49,10 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
+
 export const signInwithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
+
 export const signInwithGoogleRedirect = () => {
   signInWithRedirect(auth, googleProvider);
 };
@@ -72,8 +74,8 @@ export const addCollectionAndDocuments = async (
   console.log("done");
 };
 
-export const getCollectionAndDocuments = async () => {
-  const collectionRef = collection(db, "categories");
+export const getCollectionAndDocuments = async (collection_name) => {
+  const collectionRef = collection(db, collection_name);
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
@@ -110,7 +112,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
 
   //if user data exists
   //return userDocRef
-  return userDocRef;
+  return userSnapshot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -128,6 +130,18 @@ export const signOutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};
 /* 
 next: callback;
 error:errorcallback;

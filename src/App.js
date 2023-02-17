@@ -9,20 +9,14 @@ import Navigation from "./routes/navigation/Navigation";
 import Authentication from "./routes/authentication/Authentication";
 import Shop from "./routes/shop/Shop";
 import Checkout from "./routes/checkout/Checkout";
-import { setCurrentUser } from "./store/user/user.action";
+import { checkUserSession, googleSignInStart } from "./store/user/user.action";
 import { useDispatch } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
-    return unsubscribe;
+    dispatch(checkUserSession());
   }, []);
 
   return (
