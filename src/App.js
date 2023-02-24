@@ -1,15 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import {
-  onAuthStateChangedListener,
-  createUserDocumentFromAuth,
-} from "./utils/firebase/firebase.utils";
 import Home from "./routes/home/Home";
 import Navigation from "./routes/navigation/Navigation";
 import Authentication from "./routes/authentication/Authentication";
 import Shop from "./routes/shop/Shop";
 import Checkout from "./routes/checkout/Checkout";
-import { checkUserSession, googleSignInStart } from "./store/user/user.action";
+import { checkUserSession } from "./store/user/user.action";
 import { useDispatch } from "react-redux";
 
 const App = () => {
