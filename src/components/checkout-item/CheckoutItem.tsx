@@ -1,6 +1,7 @@
+import { memo } from "react";
 import {
   ImageContainer,
-  ChecckoutItemContainer,
+  CheckoutItemContainer,
   RemoveButton,
   Name,
   Price,
@@ -32,7 +33,7 @@ const CheckoutItem = ({ cartItem }: CartItemProps) => {
     dispatch(clearItemFromCart(cartItems, cartItem));
 
   return (
-    <ChecckoutItemContainer>
+    <CheckoutItemContainer>
       <ImageContainer>
         <img src={imageUrl} alt={`${name}`} />
       </ImageContainer>
@@ -44,8 +45,8 @@ const CheckoutItem = ({ cartItem }: CartItemProps) => {
       </Quantity>
       <Price>{price}</Price>
       <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
-    </ChecckoutItemContainer>
+    </CheckoutItemContainer>
   );
 };
 
-export default CheckoutItem;
+export default memo(CheckoutItem);
