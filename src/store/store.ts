@@ -32,6 +32,7 @@ const persistConfig: ExtendedPersisitConfig = {
 const sagaMiddleware = createSagaMiddleware();
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const middleWares = [
   process.env.NODE_ENV !== "production" && logger,
   sagaMiddleware,
